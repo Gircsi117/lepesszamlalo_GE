@@ -1,0 +1,42 @@
+<%- include("header") %>
+
+<div id="container">
+    <header>
+        <h1>Admin</h1>
+    </header>
+    <div id="menu">
+        <a href="/home">Főoldal</a>
+        <a href="/profile">Profil</a>
+        <a href="/stepadd">Lépés hozzáadása</a>
+        <% if (user.rights == "admin") { %>
+            <a href="/admin">Admin</a>
+        <% } %>
+        <div><a href="/logout">Log out</a></div>
+    </div>
+    <div id="content">
+        <h1>Admin oldal</h1>
+        <p>Itt lesz majd látható az összes ember profil adata!</p>
+        <table id="myTable">
+            <% for (let i = 0; i < field.length; i++) { %>
+                <% if (i != 3) { %>
+                    <th><%= field[i].name %> </th>
+                <% } %> 
+            <% } %>
+            <th>edit</th>
+            <% for (let i = 0; i < users.length; i++) { %>
+                <tr>
+                <% for (let j = 0; j < field.length; j++) { %>
+                    <% if (j != 3) { %>
+                        <td><%= Object.values(users[i])[j] %> </td>
+                    <% } %> 
+                   
+                <% } %>
+                <td><a href="/admin/<%= users[i].ID %>">Edit</a></td>
+                </tr>
+            <% } %>
+    
+        </table>
+    </div>
+</div>
+
+<%- include("footer") %>

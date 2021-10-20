@@ -1,0 +1,22 @@
+<%- include("header") %>
+
+<div id="container">
+    <header>
+        <h1>Profile</h1>
+    </header>
+    <div id="menu">
+        <a href="/home">Főoldal</a>
+        <a href="/profile">Profil</a>
+        <a href="/stepadd">Lépés hozzáadása</a>
+        <% if (user.rights == "admin") { %>
+            <a href="/admin">Admin</a>
+        <% } %>
+        <div><a href="/logout">Log out</a></div>
+    </div>
+    <div id="content">
+        <h1>Profil oldal</h1>
+        <p>Itt tudjuk majd megtekinteni a saját profilunkat és szerkeszteni azt!</p>
+    </div>
+</div>
+
+<%- include("footer") %>

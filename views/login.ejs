@@ -1,0 +1,15 @@
+<%- include("header") %> 
+
+<form action="/login" method="post" id="login" class="form">
+    <h2>Stepcounter</h2>
+    <h3>Login</h3>
+    <% if (hiba) { %>
+        <em><%= hiba %> </em>
+    <% } %>
+    <input type="email" name="email" id="email" placeholder="Email adress" required>
+    <input type="password" name="password" id="pass" placeholder="password" required>
+    <input type="submit" value="Login">
+    <a href="/reg">Registration</a>
+</form>
+
+<%- include("footer") %> 

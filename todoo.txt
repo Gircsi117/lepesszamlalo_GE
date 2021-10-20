@@ -1,0 +1,29 @@
+Lépésszamlaló webalkalmazás
+
+adatbázis: 214szft_lepesszamlalo
+táblák: users(ID, username, email, password, reg, last, rights, status)
+        stepdata(ID, userID, data, stepcount)
+
+user funkciók:
+    user registration
+    user login/logout
+    user pasword change
+    user profildata change
+    user stepcount manage
+    user statistics(tale, graph)
+
+admin funkciók:
+    user managment
+    statistics (table, graph)
+    dashboard????
+
+modules:
+    node
+    express
+    ejs
+    express-session
+    path
+    url
+    mysql
+    nodemon
+    moment  

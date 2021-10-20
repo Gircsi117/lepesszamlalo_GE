@@ -1,0 +1,52 @@
+<%- include("header") %> 
+
+<div id="container">
+    <header>
+        <h1><%= users.username %>  szerkesztése</h1>
+    </header>
+    <div id="menu">
+        <a href="/home">Főoldal</a>
+        <a href="/profile">Profil</a>
+        <a href="/stepadd">Lépés hozzáadása</a>
+        <a href="/admin">Admin</a>
+        <div><a href="/logout">Log out</a></div>
+    </div>
+    <div id="content">
+        <form action="/admin_edit/<%= users.ID %>" method="post" class="form edit-form">
+            <% if (hiba) { %>
+                <em><%= hiba %> </em>
+            <% } %>
+            <input type="text" name="name" id="" placeholder="Name" required value="<%= users.username %>">
+            <input type="email" name="email" id="" placeholder="Email adress" required value="<%= users.email %>">
+            <input type="password" name="password1" id="" placeholder="password (nem kötelező)">
+            <input type="password" name="password2" id="" placeholder="password again (nem kötelező)">
+            <select id="rights" name="rights" required>
+                <option value="admin"
+                <% if (users.rights == "admin") { %>
+                    selected
+                <% } %> 
+                >admin</option>
+                <option value="user"
+                    <% if (users.rights == "user") { %>
+                        selected
+                    <% } %> 
+                >user</option>
+            </select>
+            <select id="status" name="status" required>
+                <option value="1"
+                    <% if (users.status == 1) { %>
+                        selected
+                    <% } %> 
+                >active</option>
+                <option value="0"
+                    <% if (users.status == 0) { %>
+                        selected
+                    <% } %> 
+                >passive</option>
+            </select>
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+</div>
+
+<%- include("footer") %> 
