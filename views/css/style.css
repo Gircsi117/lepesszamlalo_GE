@@ -59,8 +59,8 @@ header h1{
     right: 15px;
     top: 15px;
     background-color: coral;
-    width: 60px;
-    height: 60px;
+    width: 61px;
+    height: 61px;
     color: white;
     cursor: pointer;
     border-radius: 25px;
@@ -208,7 +208,6 @@ th{
     #menu a{
         width: 70%;
         background-color: coral;
-        border: 2px solid tomato;
         border-radius: 50px;
         margin: 5px;
     }
@@ -234,8 +233,16 @@ th{
         margin: 2px auto;
     }
 
-    .alma{
-        display: none;
+    .fordul_bal{
+        position: absolute;
+        top: 27px;
+        transform: rotate(-45deg);
+    }
+
+    .fordul_jobb{
+        position: absolute;
+        top: 27px;
+        transform: rotate(45deg);
     }
 
     .teto{
