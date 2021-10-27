@@ -4,12 +4,12 @@
     <header>
         <h1><%= users.username %> szerkesztése</h1>
     </header>
-    <div id="menu">
+    < id="menu">
         <a href="/home">Főoldal</a>
         <a href="/profile">Profil</a>
         <a href="/stepadd">Lépés hozzáadása</a>
         <a href="/admin">Admin</a>
-        <div><a href="/logout">Log out</a></div>
+        <a href="/logout">Log out</a>
     </div>
     <div id="content">
         <form action="/admin_edit/<%= users.ID %>" method="post" class="form edit-form">

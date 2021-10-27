@@ -1,22 +1,32 @@
 <%- include("header") %>
 
-<div id="container">
-    <header>
-        <h1>Home</h1>
-    </header>
-    <div id="menu">
-        <a href="/home">Főoldal</a>
-        <a href="/profile">Profil</a>
-        <a href="/stepadd">Lépés hozzáadása</a>
-        <% if (user.rights == "admin") { %>
-            <a href="/admin">Admin</a>
-        <% } %>
-        <div><a href="/logout">Log out</a></div>
+    <div id="container">
+        <header>
+            <h1>Home</h1>
+        </header>
+        <div id="menu">
+            <a href="/home">Főoldal</a>
+            <a href="/profile">Profil</a>
+            <a href="/stepadd">Lépés hozzáadása</a>
+            <% if (user.rights=="admin" ) { %>
+                <a href="/admin">Admin</a>
+                <% } %>
+                    <a href="/logout">Log out</a>
+        </div>
+        <div id="content">
+            <h1>Ödvözlés</h1>
+            <p>Üdvözöllek az oldalamon!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, perspiciatis dolorem. Magnam veritatis ex aliquam quos incidunt eius hic. Neque quisquam aliquam repudiandae, porro eligendi error nulla iste voluptatibus ipsam?
+            Dolore dicta eos ea voluptatum at sunt eius quasi, nihil cum. Voluptas incidunt dolorem esse omnis quos inventore necessitatibus, commodi beatae fugiat, natus nulla cupiditate, impedit quasi! Pariatur, vel voluptas!
+            Consequatur perferendis tenetur explicabo animi voluptatem architecto impedit amet molestias cupiditate, corporis unde nesciunt eum quis inventore harum soluta officia id quisquam mollitia possimus veritatis cumque! Adipisci repellat excepturi veritatis.
+            Doloremque rerum fugiat quod alias numquam minus, labore, ex aliquid voluptates assumenda aperiam minima quibusdam nostrum iste veritatis illum optio natus perferendis! Qui, vero nemo est nihil animi soluta dolore!
+            Sit provident cupiditate, doloremque qui deleniti, tenetur impedit dolorem voluptatum aliquam iste nesciunt, illo animi vel dolorum. Iure commodi harum rem, at recusandae molestiae consequatur tempora veniam illum deleniti inventore?
+            Quidem amet veniam quos possimus ab. Cumque quibusdam, nesciunt, eius nam totam accusantium ratione nemo iusto molestias alias numquam vitae repudiandae at voluptatem corporis unde, quidem distinctio enim quas libero!
+            Exercitationem magni est quaerat, sunt, labore id beatae placeat eum ut obcaecati voluptas? Provident nihil eius, necessitatibus numquam, placeat nobis quo reprehenderit eos est, asperiores itaque iste nostrum aliquam esse.
+            Voluptatibus, enim obcaecati? Repellendus adipisci necessitatibus non ducimus optio totam molestias officia vitae eum esse in neque ullam cupiditate, consequuntur maiores quasi laboriosam quis? Numquam laboriosam hic impedit magni neque!
+            Voluptatem, non quisquam. Voluptates, illo modi tempore suscipit culpa deserunt! Sunt illum maxime facere sequi dolore doloremque odio deserunt doloribus saepe modi, reiciendis officiis ipsam quaerat aliquid exercitationem recusandae odit.
+            Voluptatibus tempore dicta eum eaque architecto doloremque id temporibus ipsum quae adipisci! Excepturi autem cupiditate ut reiciendis voluptatibus. Aliquid, sunt! Soluta ipsa maiores cumque in et voluptatem perspiciatis minus modi?</p>
+        </div>
     </div>
-    <div id="content">
-        <h1>Ödvözlés</h1>
-        <p>Üdvözöllek az oldalamon!</p>
-    </div>
-</div>
 
-<%- include("footer") %>
+    <%- include("footer") %>
