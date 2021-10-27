@@ -59,7 +59,8 @@ header h1{
     right: 15px;
     top: 15px;
     background-color: coral;
-    padding: 10px 15px;
+    width: 60px;
+    height: 60px;
     color: white;
     cursor: pointer;
     border-radius: 25px;
@@ -218,8 +219,23 @@ th{
     }
 
     #opener{
-        display: block;
+        display: flex;
         z-index: 1500;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #opener div{
+        background-color: white;
+        border-radius: 15px;
+        width: 60%;
+        height: 10%;
+        margin: 2px auto;
+    }
+
+    .alma{
+        display: none;
     }
 
     .teto{
