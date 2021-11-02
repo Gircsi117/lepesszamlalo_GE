@@ -15,11 +15,11 @@
             </tr>
             <tr>
                 <td>Regisztráció</td>
-                <td><%= user.reg %></td>
+                <td><%= (user.reg).slice(0, 19).replace('T', '. ').replace('-', '. ').replace('-', '. ') %></td>
             </tr>
             <tr>
                 <td>Utolsó belépés</td>
-                <td><%= user.last %></td>
+                <td><%= (user.last).slice(0, 19).replace('T', '. ').replace('-', '. ').replace('-', '. ') %></td>
             </tr>
             <tr>
                 <td>Összes megtett lépés</td>
