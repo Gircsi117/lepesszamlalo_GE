@@ -319,6 +319,10 @@ app.post("/reg", (req, res)=>{
     }
 })
 
+app.get("/steps", (req, res)=>{
+    
+})
+
 app.get("/logout", (req, res)=>{
     req.session.bente = false;
     res.redirect("/")
