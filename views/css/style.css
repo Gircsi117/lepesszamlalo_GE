@@ -106,7 +106,9 @@ footer p{
 
 table{
     border-collapse: collapse;
+    width: 100%;
 }
+
 td, th{
     border: 1px solid white;
     padding: 10px;
@@ -169,6 +171,8 @@ th{
     margin: 20px 0px;
     border-radius: 50px;
     color: white;
+    transition: background-color ease-in-out 0.2s,
+                color ease-in-out 0.2s;
 }
 
 .form input[type="submit"]:hover{
