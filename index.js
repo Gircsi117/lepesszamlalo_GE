@@ -68,8 +68,10 @@ app.post("/login", (req, res)=>{
                 req.session.user = data1[0]
                 req.session.bente = true;
                 console.log(req.session.user)
-                kapcs.query(`UPDATE users SET last = CURRENT_TIMESTAMP() WHERE ID = ${data1[0].ID}`)
-
+                if (user.status == 1) {
+                    kapcs.query(`UPDATE users SET last = CURRENT_TIMESTAMP WHERE ID = ${data1[0].ID}`)
+                }
+                
                 res.redirect("/home")
             }
         }
