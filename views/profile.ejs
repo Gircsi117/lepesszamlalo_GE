@@ -1,26 +1,31 @@
 <%- include("header") %>
 
 <div id="container">
-    <div id="opener">
-        <div class="menu_icon"></div>
-        <div class="menu_icon"></div>
-        <div class="menu_icon"></div>
-    </div>
-    <header>
-        <h1>Profile</h1>
-    </header>
-    <div id="menu" class="nem_lathato">
-        <a href="/home">Főoldal</a>
-        <a href="/profile">Profil</a>
-        <a href="/steps">Lépéseid</a>
-        <% if (user.rights == "admin") { %>
-            <a href="/admin">Admin</a>
-        <% } %>
-        <a href="/logout">Log out</a>
-    </div>
+    <%- include("menu") %> 
     <div id="content">
         <h1>Profil oldal</h1>
-        <p>Itt tudjuk majd megtekinteni a saját profilunkat és szerkeszteni azt!</p>
+        <table>
+            <tr>
+                <td>Felhasználónév</td>
+                <td><%= user.username %></td>
+            </tr>
+            <tr>
+                <td>E-mail cím</td>
+                <td><%= user.email %></td>
+            </tr>
+            <tr>
+                <td>Regisztráció</td>
+                <td><%= user.reg %></td>
+            </tr>
+            <tr>
+                <td>Utolsó belépés</td>
+                <td><%= user.last %></td>
+            </tr>
+            <tr>
+                <td>Összes megtett lépés</td>
+                <td><%= 15000 %></td>
+            </tr>
+        </table>
     </div>
 </div>
 

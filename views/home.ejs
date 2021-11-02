@@ -1,23 +1,7 @@
 <%- include("header") %>
 
     <div id="container">
-        <div id="opener">
-            <div class="menu_icon"></div>
-            <div class="menu_icon"></div>
-            <div class="menu_icon"></div>
-        </div>
-        <header>
-            <h1>Home</h1>
-        </header>
-        <div id="menu" class="nem_lathato">
-            <a href="/home">Főoldal</a>
-            <a href="/profile">Profil</a>
-            <a href="/steps">Lépés hozzáadása</a>
-            <% if (user.rights=="admin" ) { %>
-                <a href="/admin">Admin</a>
-                <% } %>
-                    <a href="/logout">Log out</a>
-        </div>
+        <%- include("menu") %> 
         <div id="content">
             <h1>Ödvözlés</h1>
             <p>Üdvözöllek az oldalamon!</p>

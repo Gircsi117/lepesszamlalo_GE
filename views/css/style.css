@@ -147,6 +147,7 @@ th{
 }
 
 .form input, select{
+    border-radius: 5px;
     width: 250px;
     margin: 5px 0px;
     padding: 10px;
@@ -247,5 +248,13 @@ th{
 
     .teto{
         position: relative;
+    }
+
+    .form{
+        width: 95%;
+    }
+
+    .form input, select{
+        width: 95%;
     }
 }

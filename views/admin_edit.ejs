@@ -1,21 +1,7 @@
 <%- include("header") %> 
 
 <div id="container">
-    <div id="opener">
-        <div class="menu_icon"></div>
-        <div class="menu_icon"></div>
-        <div class="menu_icon"></div>
-    </div>
-    <header>
-        <h1><%= users.username %> szerkesztése</h1>
-    </header>
-    <div id="menu" class="nem_lathato">
-        <a href="/home">Főoldal</a>
-        <a href="/profile">Profil</a>
-        <a href="/steps">Lépéseid</a>
-        <a href="/admin">Admin</a>
-        <a href="/logout">Log out</a>
-    </div>
+    <%- include("menu") %> 
     <div id="content">
         <form action="/admin_edit/<%= users.ID %>" method="post" class="form edit-form">
             <% if (hiba) { %>

@@ -79,7 +79,7 @@ app.post("/login", (req, res)=>{
 app.get("/home", (req, res)=>{
     if (req.session.bente) {
         if (req.session.user.status == '1') {
-            ejs.renderFile("views/home.ejs", {user:req.session.user}, (err, data)=>{
+            ejs.renderFile("views/home.ejs", {cim:"Home",user:req.session.user}, (err, data)=>{
                 if (err) {
                     console.log(err)
                 }
@@ -107,7 +107,7 @@ app.get("/home", (req, res)=>{
 app.get("/profile", (req, res)=>{
     if (req.session.bente) {
         if (req.session.user.status == '1') {
-            ejs.renderFile("views/profile.ejs", {user:req.session.user}, (err, data)=>{
+            ejs.renderFile("views/profile.ejs", {cim:"Profilod",user:req.session.user}, (err, data)=>{
                 if (err) {
                     console.log(err)
                 }
@@ -140,7 +140,7 @@ app.get("/admin", (req, res)=>{
                     console.log("err")
                 }
                 else{
-                    ejs.renderFile("views/admin.ejs", {user:req.session.user, users:data0, field}, (err, data)=>{
+                    ejs.renderFile("views/admin.ejs", {cim:"Admin", user:req.session.user, users:data0, field}, (err, data)=>{
                         if (err) {
                             console.log(err)
                         }
@@ -177,7 +177,7 @@ app.get("/admin/*", (req, res)=>{
                     console.log(err)
                 }
                 else{
-                    ejs.renderFile("views/admin_edit.ejs", {users:data[0], hiba:""}, (err, data1)=>{
+                    ejs.renderFile("views/admin_edit.ejs", {cim:"Admin_edit", user:req.session.user, users:data[0], hiba:""}, (err, data1)=>{
                         if (err) {
                             console.log(err)
                         }
@@ -233,7 +233,7 @@ app.post("/admin_edit/*", (req, res)=>{
                 console.log(err)
             }
             else{
-                ejs.renderFile("views/admin_edit.ejs", {users:data[0], hiba:"Jelszavak nem egyeznek!"}, (err, data1)=>{
+                ejs.renderFile("views/admin_edit.ejs", {user:req.session.user, users:data[0], hiba:"Jelszavak nem egyeznek!"}, (err, data1)=>{
                     if (err) {
                         console.log(err)
                     }
@@ -322,7 +322,7 @@ app.post("/reg", (req, res)=>{
 app.get("/steps", (req, res)=>{
     if (req.session.bente) {
         if (req.session.user.status == '1') {
-            ejs.renderFile("views/steps.ejs", {user:req.session.user}, (err, data)=>{
+            ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user}, (err, data)=>{
                 if (err) {
                     console.log(err)
                 }
