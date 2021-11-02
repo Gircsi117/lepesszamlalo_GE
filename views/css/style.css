@@ -186,7 +186,7 @@ th{
 
 /*Responzivitás*/
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     #menu{
         flex-direction: column;
         align-items: center;
@@ -260,5 +260,37 @@ th{
 
     .form input, select{
         width: 95%;
+    }
+
+    .adminTable, .adminTable tbody, .adminTable td, .adminTable tr{
+        display: block;
+        width: 100%;
+    }
+
+    .adminTable th{
+        display: none;
+    }
+
+    .adminTable tr{
+        margin-bottom: 25px;
+    }
+
+    .adminTable td{
+        min-height: 50px;
+        text-align: right;
+        padding-left: 50%;
+    }
+
+    .adminTable td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 50%;
+        padding-left: 15px;
+        text-align: left;
+    }
+
+    .adminTable tr:nth-child(odd){
+        background-color: rgb(58, 58, 58);
     }
 }
