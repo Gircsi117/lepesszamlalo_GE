@@ -5,6 +5,7 @@
     <div id="content">
         <h1>Admin oldal</h1>
         <p>Itt lesz majd látható az összes ember profil adata!</p>
+        <p><%= new Intl.DateTimeFormat('hu', { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }).format(new Date(Object.values(users[0])[4]))%></p>
         <table id="myTable">
             <% for (let i = 0; i < field.length; i++) { %>
                 <% if (i != 3) { %>
@@ -16,7 +17,13 @@
                 <tr>
                 <% for (let j = 0; j < field.length; j++) { %>
                     <% if (j != 3) { %>
-                        <td><%= Object.values(users[i])[j] %> </td>
+                        <% if (j != 4 && j != 5) { %>
+                            <td><%= Object.values(users[i])[j] %> </td>
+                        <% } else if(Object.values(users[i])[j] != null){ %> 
+                            <td><%= new Intl.DateTimeFormat('hu', { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }).format(new Date(Object.values(users[i])[j]))%></td>
+                        <% } else{ %>
+                            <td></td>
+                        <% } %> 
                     <% } %> 
                    
                 <% } %>
