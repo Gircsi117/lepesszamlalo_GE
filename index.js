@@ -320,7 +320,31 @@ app.post("/reg", (req, res)=>{
 })
 
 app.get("/steps", (req, res)=>{
-    
+    if (req.session.bente) {
+        if (req.session.user.status == '1') {
+            ejs.renderFile("views/steps.ejs", {user:req.session.user}, (err, data)=>{
+                if (err) {
+                    console.log(err)
+                }
+                else{
+                    res.send(data)
+                }
+            });
+        }
+        else{
+            ejs.renderFile("views/login.ejs", {hiba:"Sajnos ki lettél tíltva egy időre!"}, (err, data2)=>{
+                if (err) {
+                    console.log(err);
+                }
+                else{
+                    res.send(data2);
+                }
+            })
+        }
+    }
+    else{
+        res.redirect("/home")
+    }
 })
 
 app.get("/logout", (req, res)=>{

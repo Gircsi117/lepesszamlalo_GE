@@ -7,20 +7,19 @@
         <div class="menu_icon"></div>
     </div>
     <header>
-        <h1>Profile</h1>
+        <h1>Saját lépéseid</h1>
     </header>
     <div id="menu" class="nem_lathato">
         <a href="/home">Főoldal</a>
         <a href="/profile">Profil</a>
-        <a href="/steps">Lépéseid</a>
-        <% if (user.rights == "admin") { %>
+        <a href="/steps">Lépés hozzáadása</a>
+        <% if (user.rights=="admin" ) { %>
             <a href="/admin">Admin</a>
-        <% } %>
-        <a href="/logout">Log out</a>
+            <% } %>
+                <a href="/logout">Log out</a>
     </div>
     <div id="content">
-        <h1>Profil oldal</h1>
-        <p>Itt tudjuk majd megtekinteni a saját profilunkat és szerkeszteni azt!</p>
+        
     </div>
 </div>
 
