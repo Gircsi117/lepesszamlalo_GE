@@ -5,6 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const mysql = require("mysql");
 const url = require("url");
+const sha1 = require("sha1");
 const moment = require("moment");
 const dbconfig = require("./config.js")
 const { urlencoded } = require("express");

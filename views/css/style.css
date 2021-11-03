@@ -119,6 +119,27 @@ th{
     background-color: rgb(61, 61, 61);
 }
 
+.mod_button{
+    display: block;
+    background-color: green;
+    color: white;
+    padding: 15px;
+    margin: 5px auto;
+    font-size: 20px;
+    width: 250px;
+    text-align: center;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color ease-in-out 0.2s,
+                color ease-in-out 0.2s;
+}
+
+.mod_button:hover{
+    text-decoration: none;
+    background-color: white;
+    color: green;
+}
+
 /*Formok beállításai*/
 .form h2, h3{
     text-align: center;
@@ -292,5 +313,9 @@ th{
 
     .adminTable tr:nth-child(odd){
         background-color: rgb(58, 58, 58);
+    }
+
+    .mod_button{
+        width: 100%;
     }
 }
