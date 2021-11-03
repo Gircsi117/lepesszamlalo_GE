@@ -116,21 +116,20 @@ app.get("/profile", (req, res)=>{
                     console.log(err)
                 }
                 else{
-                    if (data1.length > 0) {
-                        console.log("Hossz:")
-                        console.log(data1[0].ossz)
+                    console.log("Hossz:")
+                    console.log(data1[0].ossz)
+                    if (data1[0].ossz != null) {
                         ossz = data1[0].ossz;
-                        console.log(ossz);
-
-                        ejs.renderFile("views/profile.ejs", {cim:"Profilod",user:req.session.user, megtett:ossz}, (err, data2)=>{
-                            if (err) {
-                                console.log(err)
-                            }
-                            else{
-                                res.send(data2)
-                            }
-                        });
                     }
+
+                    ejs.renderFile("views/profile.ejs", {cim:"Profilod",user:req.session.user, megtett:ossz}, (err, data2)=>{
+                        if (err) {
+                            console.log(err)
+                        }
+                        else{
+                            res.send(data2)
+                        }
+                    });
                 }
             })
         }
@@ -340,22 +339,29 @@ app.post("/reg", (req, res)=>{
 app.get("/steps", (req, res)=>{
     if (req.session.bente) {
         if (req.session.user.status == '1') {
-            ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user}, (err, data)=>{
+            kapcs.query(`SELECT * FROM stepdata WHERE userID = ${req.session.user.ID} ORDER BY date DESC`, (err, data1)=>{
                 if (err) {
                     console.log(err)
                 }
                 else{
-                    res.send(data)
+                    ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1}, (err, data2)=>{
+                        if (err) {
+                            console.log(err)
+                        }
+                        else{
+                            res.send(data2)
+                        }
+                    });
                 }
-            });
+            })
         }
         else{
-            ejs.renderFile("views/login.ejs", {hiba:"Sajnos ki lettél tíltva egy időre!"}, (err, data2)=>{
+            ejs.renderFile("views/login.ejs", {hiba:"Sajnos ki lettél tíltva egy időre!"}, (err, data3)=>{
                 if (err) {
                     console.log(err);
                 }
                 else{
-                    res.send(data2);
+                    res.send(data3);
                 }
             })
         }
@@ -369,16 +375,35 @@ app.post("/step_add", (req, res)=>{
     var datum = req.body.datum;
     var lepes = req.body.lepes;
 
-    kapcs.query(`INSERT INTO stepdata VALUES (null,'${req.session.user.ID}','${datum}',${lepes})`, (err)=>{
+    kapcs.query(`SELECT * FROM stepdata WHERE date = '${datum}'`, (err, data_date)=>{
         if (err) {
             console.log(err)
         }
         else{
-            console.log(`Sikeres adatfelvétel! (null,${req.session.user.ID},${datum},${lepes})`)
+            if (data_date.length == 0) {
+                kapcs.query(`INSERT INTO stepdata VALUES (null,'${req.session.user.ID}','${datum}',${lepes})`, (err)=>{
+                    if (err) {
+                        console.log(err)
+                    }
+                    else{
+                        console.log(`Sikeres adatfelvétel! (null,${req.session.user.ID},${datum},${lepes})`)
+                    }
+                })
+            }
+            else{
+                kapcs.query(`UPDATE stepdata SET stepcount = ${Number(data_date[0].stepcount) + Number(lepes)} WHERE date = '${datum}'`, (err)=>{
+                    if (err) {
+                        console.log(err)
+                    }
+                    else{
+                        console.log(`Sikeres adatfrissítés! ${Number(data_date[0].stepcount) + Number(lepes)}`)
+                    }
+                })
+            }
         }
     })
 
-    res.redirect("/home")
+    res.redirect("/steps")
 })
 
 app.get("/logout", (req, res)=>{
