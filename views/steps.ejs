@@ -3,10 +3,10 @@
 <div id="container">
     <%- include("menu") %> 
     <div id="content">
-        <form action="/step_add" class="form edit-form">
+        <form action="/step_add" class="form edit-form" method="post">
             <h2>Lépés hozzáadása</h2>
             <input type="date" name="datum" id="" max="">
-            <input type="number" name="lepes" id="" min="1">
+            <input type="number" name="lepes" id="" min="1" value="1">
             <input type="submit" value="Felvétel">
         </form>
     </div>
