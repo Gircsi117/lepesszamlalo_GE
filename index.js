@@ -84,7 +84,7 @@ app.post("/login", (req, res)=>{
                             console.log(req.session.ossz);
                         }
                     }
-                    
+
                     if (user.status == 1) {
                         kapcs.query(`UPDATE users SET last = CURRENT_TIMESTAMP WHERE ID = ${data1[0].ID}`)
                     }
@@ -348,7 +348,9 @@ app.get("/steps", (req, res)=>{
                     console.log(err)
                 }
                 else{
-                    ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1}, (err, data2)=>{
+                    var n = new Date();
+                    var ma = `${n.getFullYear()}-${n.getMonth()+1}-${(n.getDate() < 10) ? (`0${n.getDate()}`):(n.getDate())}`;
+                    ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1, ma:ma}, (err, data2)=>{
                         if (err) {
                             console.log(err)
                         }
