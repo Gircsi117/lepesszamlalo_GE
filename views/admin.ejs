@@ -17,16 +17,16 @@
                 <% for (let j = 0; j < field.length; j++) { %>
                     <% if (j != 3) { %>
                         <% if (j != 4 && j != 5) { %>
-                            <td data-label="<%= Object.keys(users[i])[j] %> "><%= Object.values(users[i])[j] %> </td>
+                            <td><span class="rejtettCim"><%= Object.keys(users[i])[j] %></span><span><%= Object.values(users[i])[j] %></span></td>
                         <% } else if(Object.values(users[i])[j] != null){ %> 
-                            <td data-label="<%= Object.keys(users[i])[j] %> "><%= new Intl.DateTimeFormat('hu', { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }).format(new Date(Object.values(users[i])[j]))%></td>
+                            <td><span class="rejtettCim"><%= Object.keys(users[i])[j] %></span><span><%= new Intl.DateTimeFormat('hu', { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }).format(new Date(Object.values(users[i])[j]))%></span></td>
                         <% } else{ %>
-                            <td data-label="<%= Object.keys(users[i])[j] %> "></td>
+                            <td><span class="rejtettCim"><%= Object.keys(users[i])[j] %></span><span></span></td>
                         <% } %> 
                     <% } %> 
                    
                 <% } %>
-                <td data-label="edit"><a href="/admin/<%= users[i].ID %>">Edit</a></td>
+                <td><span class="rejtettCim">Edit</span><a href="/admin/<%= users[i].ID %>">Edit</a></td>
                 </tr>
             <% } %>
     
