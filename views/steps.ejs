@@ -11,16 +11,18 @@
         </form>
         <table>
             <tr>
-                <th colspan="2">Összes megtett lépés: </th>
+                <th colspan="3">Összes megtett lépés: <%= ossz %> </th>
             </tr>
             <tr>
                 <th>Időpont</th>
                 <th>Megtett lépés</th>
+                <th>Törlés</th>
             </tr>
             <% for (let i = 0; i < stepdatas.length; i++) { %>
                 <tr>
                     <td><%= new Intl.DateTimeFormat('hu', { year: 'numeric', month: '2-digit', day: '2-digit', hour12: false }).format(new Date(stepdatas[i].date))%></td>
                     <td><%= stepdatas[i].stepcount %> db</td>
+                    <td style="text-align: center;"><a href="/step_delete/<%= stepdatas[i].ID %>">Delete</a></td>
                 </tr>
             <% } %> 
         </table>

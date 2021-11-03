@@ -350,7 +350,7 @@ app.get("/steps", (req, res)=>{
                 else{
                     var n = new Date();
                     var ma = `${n.getFullYear()}-${n.getMonth()+1}-${(n.getDate() < 10) ? (`0${n.getDate()}`):(n.getDate())}`;
-                    ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1, ma:ma}, (err, data2)=>{
+                    ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1, ma:ma, ossz:req.session.ossz}, (err, data2)=>{
                         if (err) {
                             console.log(err)
                         }
@@ -381,7 +381,7 @@ app.post("/step_add", (req, res)=>{
     var datum = req.body.datum;
     var lepes = req.body.lepes;
 
-    kapcs.query(`SELECT * FROM stepdata WHERE date = '${datum}'`, (err, data_date)=>{
+    kapcs.query(`SELECT * FROM stepdata WHERE date = '${datum}' AND userID = ${req.session.user.ID}`, (err, data_date)=>{
         if (err) {
             console.log(err)
         }
@@ -410,6 +410,36 @@ app.post("/step_add", (req, res)=>{
     })
 
     res.redirect("/steps")
+})
+
+app.get("/step_delete/*", (req, res)=>{
+    var lepesID = req.params[0];
+    if (req.session.bente) {
+        if (req.session.user.status == '1') {
+            kapcs.query(`DELETE FROM stepdata WHERE ID = ${lepesID} AND userID = ${req.session.user.ID}`, (err)=>{
+                if (err) {
+                    console.log(err)                    
+                }
+                else{
+                    console.log("Lépés sikeresen törölve!")
+                    res.redirect("/steps");
+                }
+            })
+        }
+        else{
+            ejs.renderFile("views/login.ejs", {hiba:"Sajnos ki lettél tíltva egy időre!"}, (err, data3)=>{
+                if (err) {
+                    console.log(err);
+                }
+                else{
+                    res.send(data3);
+                }
+            })
+        }
+    }
+    else{
+        res.redirect("/home")
+    }
 })
 
 app.get("/logout", (req, res)=>{
