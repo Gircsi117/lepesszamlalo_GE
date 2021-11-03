@@ -4,7 +4,7 @@ var menu_icons = document.getElementsByClassName("menu_icon")
 
 
 document.addEventListener("scroll", ()=>{
-    if (window.scrollY > 300) {
+    if (window.scrollY > 350) {
         menu.classList.add("teto")
     }
     else {
