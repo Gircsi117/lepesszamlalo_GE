@@ -9,6 +9,21 @@
             <input type="number" name="lepes" id="" min="1" value="1" required>
             <input type="submit" value="Felvétel">
         </form>
+        <table>
+            <tr>
+                <th colspan="2">Összes megtett lépés: </th>
+            </tr>
+            <tr>
+                <th>Időpont</th>
+                <th>Megtett lépés</th>
+            </tr>
+            <% for (let i = 0; i < stepdatas.length; i++) { %>
+                <tr>
+                    <td><%= new Intl.DateTimeFormat('hu', { year: 'numeric', month: '2-digit', day: '2-digit', hour12: false }).format(new Date(stepdatas[i].date))%></td>
+                    <td><%= stepdatas[i].stepcount %> db</td>
+                </tr>
+            <% } %> 
+        </table>
     </div>
 </div>
 

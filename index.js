@@ -68,12 +68,28 @@ app.post("/login", (req, res)=>{
             else{
                 req.session.user = data1[0]
                 req.session.bente = true;
+                req.session.ossz = 0;
                 console.log(req.session.user)
-                if (user.status == 1) {
-                    kapcs.query(`UPDATE users SET last = CURRENT_TIMESTAMP WHERE ID = ${data1[0].ID}`)
-                }
-                
-                res.redirect("/home")
+
+                kapcs.query(`SELECT SUM(stepcount) as ossz FROM stepdata WHERE userID = ${req.session.user.ID}`, (err, data_ossz)=>{
+                    if (err) {
+                        console.log(err)
+                    }
+                    else{
+                        console.log("Hossz:")
+                        console.log(data_ossz[0].ossz)
+                        if (data_ossz[0].ossz != null) {
+                            req.session.ossz = data_ossz[0].ossz;
+                            console.log("Session hossz:");
+                            console.log(req.session.ossz);
+                        }
+                    }
+                    
+                    if (user.status == 1) {
+                        kapcs.query(`UPDATE users SET last = CURRENT_TIMESTAMP WHERE ID = ${data1[0].ID}`)
+                    }
+                    res.redirect("/home")
+                })   
             }
         }
     })
@@ -110,28 +126,16 @@ app.get("/home", (req, res)=>{
 app.get("/profile", (req, res)=>{
     if (req.session.bente) {
         if (req.session.user.status == '1') {
-            var ossz = 0;
-            kapcs.query(`SELECT SUM(stepcount) as ossz FROM stepdata WHERE userID = ${req.session.user.ID}`, (err, data1)=>{
+            console.log(`Session2: ${req.session.ossz}`)
+            ejs.renderFile("views/profile.ejs", {cim:"Profilod",user:req.session.user, megtett:req.session.ossz}, (err, data2)=>{
                 if (err) {
                     console.log(err)
                 }
                 else{
-                    console.log("Hossz:")
-                    console.log(data1[0].ossz)
-                    if (data1[0].ossz != null) {
-                        ossz = data1[0].ossz;
-                    }
-
-                    ejs.renderFile("views/profile.ejs", {cim:"Profilod",user:req.session.user, megtett:ossz}, (err, data2)=>{
-                        if (err) {
-                            console.log(err)
-                        }
-                        else{
-                            res.send(data2)
-                        }
-                    });
+                    console.log(req.session.ossz)
+                    res.send(data2)
                 }
-            })
+            });
         }
         else{
             ejs.renderFile("views/login.ejs", {hiba:"Sajnos ki lettél tíltva egy időre!"}, (err, data3)=>{
