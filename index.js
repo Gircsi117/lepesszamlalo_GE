@@ -340,21 +340,34 @@ app.post("/reg", (req, res)=>{
 app.get("/steps", (req, res)=>{
     if (req.session.bente) {
         if (req.session.user.status == '1') {
-            kapcs.query(`SELECT * FROM stepdata WHERE userID = ${req.session.user.ID} ORDER BY date DESC`, (err, data1)=>{
+            var ossz = 0;
+            kapcs.query(`SELECT SUM(stepcount) as ossz FROM stepdata WHERE userID = ${req.session.user.ID}`, (err, data_ossz)=>{
                 if (err) {
                     console.log(err)
                 }
                 else{
-                    var n = new Date();
-                    var ma = `${n.getFullYear()}-${n.getMonth()+1}-${(n.getDate() < 10) ? (`0${n.getDate()}`):(n.getDate())}`;
-                    ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1, ma:ma, ossz:req.session.ossz}, (err, data2)=>{
+                    console.log("Hossz:")
+                    console.log(data_ossz[0].ossz)
+                    if (data_ossz[0].ossz != null) {
+                        ossz = data_ossz[0].ossz;
+                    }
+                    kapcs.query(`SELECT * FROM stepdata WHERE userID = ${req.session.user.ID} ORDER BY date DESC`, (err, data1)=>{
                         if (err) {
                             console.log(err)
                         }
                         else{
-                            res.send(data2)
+                            var n = new Date();
+                            var ma = `${n.getFullYear()}-${n.getMonth()+1}-${(n.getDate() < 10) ? (`0${n.getDate()}`):(n.getDate())}`;
+                            ejs.renderFile("views/steps.ejs", {cim:"Lépéseid", user:req.session.user, stepdatas:data1, ma:ma, ossz:ossz}, (err, data2)=>{
+                                if (err) {
+                                    console.log(err)
+                                }
+                                else{
+                                    res.send(data2)
+                                }
+                            });
                         }
-                    });
+                    })
                 }
             })
         }
