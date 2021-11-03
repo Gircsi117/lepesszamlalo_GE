@@ -350,6 +350,17 @@ app.get("/steps", (req, res)=>{
     }
 })
 
+app.post("/step_add", (req, res)=>{
+    var datum = req.body.datum;
+    var lepes = req.body.lepes;
+
+    kapcs.query(`INSERT INTO stepdata VALUES (null,${user.ID},${datum},${lepes})`, (err)=>{
+        
+    })
+
+    res.redirect("/home")
+})
+
 app.get("/logout", (req, res)=>{
     req.session.bente = false;
     res.redirect("/")
