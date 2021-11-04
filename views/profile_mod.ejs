@@ -1,0 +1,21 @@
+<%- include("header") %>
+
+    <div id="container">
+        <%- include("menu") %> 
+        <div id="content">
+            <form action="/profile_mod<% user.ID %>" method="post" class="form edit-form">
+                <h2>Saját adatok szerkesztése</h2>
+                <% if (hiba) { %>
+                    <em><%= hiba %></em>
+                <% } %> 
+                <input type="text" name="name" id="" placeholder="Username" value="<%= user.username %>" required>
+                <input type="email" name="email" id="" placeholder="E-mail" value="<%= user.email %>" required>
+                <input type="password" name="pass_now" id="" placeholder="Jelenlegi jelszó" required>
+                <input type="password" name="pass1" id="" placeholder="Új jelszó">
+                <input type="password" name="pass2" id="" placeholder="Új jelszó újra">
+                <input type="submit" value="Módosítás">
+            </form>
+        </div>
+    </div>
+
+    <%- include("footer") %>

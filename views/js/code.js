@@ -6,9 +6,11 @@ var menu_icons = document.getElementsByClassName("menu_icon")
 document.addEventListener("scroll", ()=>{
     if (window.scrollY > 350) {
         menu.classList.add("teto")
+        document.getElementById("content").style.marginTop = "50px"
     }
     else {
         menu.classList.remove("teto")
+        document.getElementById("content").style.marginTop = "0px"
     }
 })
 

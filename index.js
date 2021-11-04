@@ -150,6 +150,111 @@ app.get("/profile", (req, res)=>{
     }
 })
 
+app.get("/profile_mod", (req, res)=>{
+    ejs.renderFile("views/profile_mod.ejs", {cim:"Szerkesztés", hiba:"", user:req.session.user}, (err, data)=>{
+        if (err) {
+            console.log(err)
+        }
+        else{
+            res.send(data);
+        }
+    })
+})
+
+app.post("/profile_mod", (req, res)=>{
+    var name = req.body.name;
+    var email = req.body.email;
+    var jelenlegi = req.body.pass_now
+    var pass1 = req.body.pass1
+    var pass2 = req.body.pass2
+    //hibás jelszó - foglalt email cím - foglalt jelszavak
+    kapcs.query(`SELECT * FROM users WHERE password = SHA1('${jelenlegi}') AND ID = ${req.session.user.ID}`, (err1, data1)=>{
+        if (err1) {
+            console.log(err1)
+        }
+        else{
+            if (data1.length == 0) {
+                ejs.renderFile("views/profile_mod.ejs", {cim:"Szerkesztés", hiba:"Nem jó a megadott jelszó", user:req.session.user}, (err, data)=>{
+                    if (err) {
+                        console.log(err)
+                    }
+                    else{
+                        res.send(data);
+                    }
+                })
+            }
+            else{
+                kapcs.query(`SELECT * FROM users WHERE email = '${email}' AND ID != ${req.session.user.ID}`, (err2, data2)=>{
+                    if (err2) {
+                        console.log("majonéz");
+                        console.log(err2)
+                    }
+                    else{
+                        if (data2.length > 0) {
+                            ejs.renderFile("views/profile_mod.ejs", {cim:"Az email cím már foglalt!", hiba:"Nem jó a megadott jelszó", user:req.session.user}, (err, data)=>{
+                                if (err) {
+                                    console.log(err)
+                                }
+                                else{
+                                    res.send(data);
+                                }
+                            })
+                        }
+                        else{
+                            if (pass1 != pass2) {
+                                ejs.renderFile("views/profile_mod.ejs", {cim:"Szerkesztés", hiba:"A jelszavak nem egyeznek", user:req.session.user}, (err, data)=>{
+                                    if (err) {
+                                        console.log(err)
+                                    }
+                                    else{
+                                        res.send(data);
+                                    }
+                                })
+                            }
+                            else{
+                                kapcs.query(`SELECT * FROM users WHERE password = SHA1('${pass1}')`, (err4, data4)=>{
+                                    if (err4) {
+                                        console.log(err4)
+                                    }
+                                    else{
+                                        if (data4.length > 0) {
+                                            ejs.renderFile("views/profile_mod.ejs", {cim:"Szerkesztés", hiba:"A jelszavak foglatak", user:req.session.user}, (err, data)=>{
+                                                if (err) {
+                                                    console.log(err)
+                                                }
+                                                else{
+                                                    res.send(data);
+                                                }
+                                            })
+                                        }
+                                        else{
+                                            var pass_minta = "";
+                                            if (pass1 != "") {
+                                                pass_minta = `,password=SHA1('${pass1}')`
+                                            }
+                                            kapcs.query(`UPDATE users SET username='${name}',email='${email}'${pass_minta} WHERE ID = ${req.session.user.ID}`, (err)=>{
+                                                if (err) {
+                                                    console.log(err)
+                                                }
+                                                else{
+                                                    req.session.user.username = name;
+                                                    req.session.user.email = email;
+                                                    console.log("Sikeresen módosítva!")
+                                                    res.redirect("profile");
+                                                }
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    })
+})
+
 app.get("/admin", (req, res)=>{
     if (req.session.bente && req.session.user.rights == "admin") {
         if (req.session.user.status == '1') {
