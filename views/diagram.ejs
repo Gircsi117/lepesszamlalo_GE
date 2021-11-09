@@ -1,0 +1,37 @@
+<%- include("header") %>
+
+<div id="container">
+    <%- include("menu") %> 
+    <div id="content">
+        <script>
+            window.onload = function () {
+            
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                exportEnabled: true,
+                theme: "dark2", // "light1", "light2", "dark1", "dark2"
+                title:{
+                    text: "Megtett lépések"
+                },
+                  axisY: {
+                  includeZero: true
+                },
+                data: [{
+                    type: "splineArea", //change type to bar, line, area, pie, etc
+                    //indexLabel: "{y}", //Shows y value on all Data Points
+                    indexLabelFontColor: "#0FF",
+                      indexLabelFontSize: 16,
+                    indexLabelPlacement: "outside",
+                    dataPoints: [<%- dia %>]
+                }]
+            });
+            chart.render();
+            
+            }
+            </script>
+
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+
+<%- include("footer") %>

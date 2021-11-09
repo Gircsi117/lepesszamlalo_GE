@@ -150,6 +150,49 @@ app.get("/profile", (req, res)=>{
     }
 })
 
+app.get("/diagram", (req, res)=>{
+    if (req.session.bente) {
+        if (req.session.user.status == '1') {
+            kapcs.query(`SELECT date AS x, stepcount as y FROM stepdata WHERE userID = ${req.session.user.ID} ORDER BY date`, (err, data)=>{
+                if (err) {
+                    console.log(err)
+                }
+                else{
+                    console.log(data)
+                    var str = "";
+                    var alma = 0;
+                    data.forEach(element => {
+                        str += `{label: "${moment(element.x).format('YYYY-MM-DD')}", y: ${element.y}},`;
+                        alma++;
+                    });
+                    console.log(JSON.stringify(data))
+                    ejs.renderFile("views/diagram.ejs", {cim:"Diagramm", user:req.session.user, dia:str.substring(0, str.length-1)}, (err, data2)=>{
+                        if (err) {
+                            console.log(err)
+                        }
+                        else{
+                            res.send(data2)
+                        }
+                    });
+                }
+            })
+        }
+        else{
+            ejs.renderFile("views/login.ejs", {hiba:"Sajnos ki lettél tíltva egy időre!"}, (err, data3)=>{
+                if (err) {
+                    console.log(err);
+                }
+                else{
+                    res.send(data3);
+                }
+            })
+        }
+    }
+    else{
+        res.redirect("/home")
+    }
+})
+
 app.get("/profile_mod", (req, res)=>{
     ejs.renderFile("views/profile_mod.ejs", {cim:"Szerkesztés", hiba:"", user:req.session.user}, (err, data)=>{
         if (err) {
